@@ -2,9 +2,9 @@ package org.winharleigh.exercise.client;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.exercise.dto.CustomerDto;
-import org.example.exercise.exception.CustomerAdaptorUnavailableException;
 import org.springframework.web.client.RestTemplate;
+import org.winharleigh.exercise.dto.CustomerDto;
+import org.winharleigh.exercise.exception.CustomerAdaptorUnavailableException;
 
 import static java.lang.String.format;
 import static java.util.Objects.requireNonNull;
