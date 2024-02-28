@@ -1,0 +1,10 @@
+{
+  "customerRef": "ref001",
+  "customerName": "Fred Blogs",
+  "addressLineOne": "1 Some Road",
+  "addressLineTwo": "Some Area",
+  "town": "Townton",
+  "county": null,
+  "country": "Warwickshire",
+  "postcode": "England"
+}
