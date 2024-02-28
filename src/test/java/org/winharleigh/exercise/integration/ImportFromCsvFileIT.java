@@ -1,21 +1,25 @@
-package org.winharleigh.customer.integration;
+package org.winharleigh.exercise.integration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.winharleigh.customer.dto.CustomerDto;
+import org.winharleigh.exercise.client.CustomerAdaptorClient;
+import org.winharleigh.exercise.dto.CustomerDto;
 import org.winharleigh.exercise.service.ImportFromCsvFile;
 import org.winharleigh.exercise.service.RetrievedFileContents;
 import org.winharleigh.exercise.transformer.ConvertCsvRecordToCustomer;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 import static java.util.Objects.requireNonNull;
-import static org.winharleigh.customer.util.TestHelper.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.verify;
+import static org.winharleigh.exercise.util.TestHelper.*;
 
 @ExtendWith(MockitoExtension.class)
 public class ImportFromCsvFileIT {
@@ -24,6 +28,8 @@ public class ImportFromCsvFileIT {
     private RetrievedFileContents retrievedFileContents;
     private ConvertCsvRecordToCustomer transformer;
     private ObjectMapper objectMapper;
+    @Mock
+    private CustomerAdaptorClient customerAdaptorClient;
     private String resourceDirectory;
 
     @BeforeEach
@@ -31,20 +37,17 @@ public class ImportFromCsvFileIT {
         retrievedFileContents = new RetrievedFileContents();
         transformer = new ConvertCsvRecordToCustomer();
         objectMapper = new ObjectMapper();
-        importCsv = new ImportFromCsvFile(retrievedFileContents, transformer, objectMapper);
+        importCsv = new ImportFromCsvFile(retrievedFileContents, transformer, objectMapper, customerAdaptorClient);
     }
 
     @Test
-    void process() throws FileNotFoundException {
-        String jsonFilePath = getResourceFilePath("/json/customer_content.json");
-        Scanner scanner = new Scanner(new File(jsonFilePath));
-        String json = getExpectedJson(scanner);
-        CustomerDto customer = getCustomerDto();
-        String customerAsString = getCustomerAsString();
-
+    void shouldCallSaveToDbPostRestWhenJsonSuccessfullyAbstractedFromCsv() throws FileNotFoundException {
+        doNothing().when(customerAdaptorClient).sendCustomerContactDetail(any());
         String csvFilePath = getResourceFilePath("/csv/customer_contact.csv");
 
         importCsv.process(csvFilePath);
+
+        verify(customerAdaptorClient).sendCustomerContactDetail(any());
     }
 
     private String getExpectedJson(Scanner scanner) {

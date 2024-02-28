@@ -1,8 +1,7 @@
-package org.winharleigh.customer.service;
+package org.winharleigh.exercise.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.winharleigh.exercise.service.RetrievedFileContents;
 
 import java.util.Scanner;
 

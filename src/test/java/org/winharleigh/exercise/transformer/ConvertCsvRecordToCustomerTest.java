@@ -1,9 +1,8 @@
-package org.winharleigh.customer.transformer;
+package org.winharleigh.exercise.transformer;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.winharleigh.customer.dto.CustomerDto;
-import org.winharleigh.exercise.transformer.ConvertCsvRecordToCustomer;
+import org.winharleigh.exercise.dto.CustomerDto;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
