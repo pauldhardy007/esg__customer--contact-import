@@ -12,11 +12,9 @@ import org.winharleigh.exercise.dto.CustomerDto;
 import org.winharleigh.exercise.transformer.ConvertCsvRecordToCustomer;
 import org.winharleigh.exercise.util.TestHelper;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import static java.util.Objects.requireNonNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.winharleigh.exercise.util.TestHelper.*;
@@ -44,17 +42,19 @@ public class ImportFromCsvFileTest {
     }
 
     @Test
-    void process() throws JsonProcessingException, FileNotFoundException {
+    void shouldExtractDataFromCsvAndPostToSaveToDbRestCallWhenNoExceptionOccur() throws JsonProcessingException,
+            FileNotFoundException {
         String csvFilePath = testHelper.getResourceFilePath("/csv/customer_contact.csv");
         Scanner scanner = getScanner(csvFilePath);
         String customerAsString = getCustomerAsString();
         CustomerDto customer = getCustomerDto();
-        String json = getExpectedJson(testHelper.getResourceFilePath("/json/customer_content.json"));
+        String json = getExpectedJson("/json/customer_content.json");
 
         when(retrievedFileContents.getScanner(csvFilePath)).thenReturn(scanner);
         when(transformer.transform(customerAsString)).thenReturn(customer);
         when(objectMapper.writeValueAsString(customer)).thenReturn(json);
-        doNothing().when(customerAdaptorClient).sendCustomerContactDetail(json);
+        doNothing().when(customerAdaptorClient)
+                .sendCustomerContactDetail(json);
 
         importCsv.process(csvFilePath);
 
