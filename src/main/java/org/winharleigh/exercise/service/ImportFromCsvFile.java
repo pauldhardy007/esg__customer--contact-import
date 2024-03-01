@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.winharleigh.exercise.client.CustomerAdaptorClient;
 import org.winharleigh.exercise.dto.CustomerDto;
@@ -17,7 +18,7 @@ public class ImportFromCsvFile {
 
     private RetrievedFileContents retrievedFileContents;
     private ConvertCsvRecordToCustomer transformer;
-    private ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper;
     private CustomerAdaptorClient customerAdaptorClient;
 
     public void process(final String filePath) {

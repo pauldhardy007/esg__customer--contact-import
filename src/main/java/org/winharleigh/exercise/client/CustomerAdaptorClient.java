@@ -2,6 +2,7 @@ package org.winharleigh.exercise.client;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.winharleigh.exercise.dto.CustomerDto;
@@ -12,6 +13,7 @@ import static java.util.Objects.requireNonNull;
 
 @Slf4j
 @RequiredArgsConstructor
+@Component
 public class CustomerAdaptorClient {
 
     private static final String CUSTOMERS_CONTACT_SAVE_URI = "/customers/contact/save";
