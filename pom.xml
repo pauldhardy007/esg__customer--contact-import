@@ -97,7 +97,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>org.winharleigh.exercise.Application</mainClass>
+                            <mainClass>org.esg.exercise.Application</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -107,7 +107,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>org.winharleigh.exercise.Application</mainClass>
+                            <mainClass>org.esg.exercise.Application</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
