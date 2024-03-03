@@ -17,10 +17,8 @@ public class CustomerAdaptorClient {
 
     public void sendCustomerContactDetail(final String payload) {
         try {
-            System.out.println("HERE sendCustomerContactDetail - IN");
             customerAdaptorRestTemplate
                     .postForEntity(CUSTOMERS_CONTACT_SAVE_URI, payload, Void.class);
-            System.out.println("HERE sendCustomerContactDetail - OUT");
         } catch (final RestClientException e) {
             throw new CustomerAdaptorUnavailableException(e.getMessage(), "Getting Customer");
         }
