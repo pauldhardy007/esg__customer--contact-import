@@ -2,13 +2,10 @@ package org.esg.exercise.client;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.esg.exercise.exception.CustomerAdaptorUnavailableException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
-import org.esg.exercise.exception.CustomerAdaptorUnavailableException;
-
-import static java.lang.String.format;
-import static java.util.Objects.requireNonNull;
 
 @Slf4j
 @RequiredArgsConstructor
