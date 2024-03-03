@@ -1,9 +1,12 @@
 package org.esg.exercise.exception;
 
+import lombok.Getter;
+
+@Getter
 public class CustomerAdaptorUnavailableException extends RuntimeException {
 
-    private String errorMessage;
-    private String adaptorOperation;
+    private final String errorMessage;
+    private final String adaptorOperation;
 
     public CustomerAdaptorUnavailableException(final String errorMessage, final String adaptorOperation) {
         super();
